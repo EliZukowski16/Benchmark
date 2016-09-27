@@ -40,7 +40,7 @@ public class Language extends AbstractDomainObject implements DomainObject
         this(language, null, false);
     }
 
-    public Language(LanguageName language, Integer id)
+    public Language(LanguageName language, int id)
     {
         this(language, id, true);
     }
@@ -57,12 +57,12 @@ public class Language extends AbstractDomainObject implements DomainObject
     }
 
     @Override
-    public DomainObject clone()
+    public Language clone()
     {
-        FrontEndServer copy;
+        Language copy;
         try
         {
-            copy = (FrontEndServer) super.clone();
+            copy = (Language) super.clone();
             return copy;
         }
         catch (CloneNotSupportedException e)

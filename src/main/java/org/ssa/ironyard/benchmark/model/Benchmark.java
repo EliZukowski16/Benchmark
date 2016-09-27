@@ -14,7 +14,7 @@ public class Benchmark extends AbstractDomainObject implements DomainObject
 
     public enum Threads
     {
-        _8("8"), _16("16"), _32("32"), _64("64"), _128("128"), _256("256");
+        _8("8_threads"), _16("16_threads"), _32("32_threads"), _64("64_threads"), _128("128_threads"), _256("256_threads");
 
         private String numberThreads;
 

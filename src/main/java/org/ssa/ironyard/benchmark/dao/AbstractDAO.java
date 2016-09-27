@@ -59,7 +59,7 @@ public abstract class AbstractDAO<T extends DomainObject> implements DAO<T>
         try
         {
             connection = this.datasource.getConnection();
-            read = connection.prepareStatement(this.orm.prepareRead());
+            read = connection.prepareStatement(this.orm.prepareReadById());
             read.setInt(1, id);
             query = read.executeQuery();
             if (query.next())

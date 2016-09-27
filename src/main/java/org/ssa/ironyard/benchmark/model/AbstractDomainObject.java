@@ -2,8 +2,8 @@ package org.ssa.ironyard.benchmark.model;
 
 public abstract class AbstractDomainObject
 {
-    protected final Integer id;
-    protected Boolean loaded;
+    private final Integer id;
+    private Boolean loaded;
     
     protected AbstractDomainObject(Integer id)
     {
