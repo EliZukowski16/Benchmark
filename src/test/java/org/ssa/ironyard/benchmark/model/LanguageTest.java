@@ -1,11 +1,10 @@
 package org.ssa.ironyard.benchmark.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.ssa.ironyard.benchmark.model.Language.LanguageName;
 
@@ -14,48 +13,24 @@ public class LanguageTest
     Language testLanguageOne;
     Language testLanguageTwo;
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception
-    {
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception
-    {
-    }
-
-    @Before
-    public void setUp() throws Exception
-    {
-    }
-
-    @After
-    public void tearDown() throws Exception
-    {
-    }
-
-    @Test
-    public void testHashCode()
-    {
-        fail("Not yet implemented"); // TODO
-    }
-
-    @Test
-    public void testLanguageLanguageName()
-    {
-        fail("Not yet implemented"); // TODO
-    }
-
-    @Test
-    public void testLanguageLanguageNameInteger()
-    {
-        fail("Not yet implemented"); // TODO
-    }
-
     @Test
     public void testGetLanguage()
     {
-        fail("Not yet implemented"); // TODO
+        for(LanguageName l : LanguageName.values())
+        {
+            testLanguageOne = new Language(null);
+            
+            assertNotEquals(l, testLanguageOne.getName());
+            assertEquals(null, testLanguageOne.getName());
+            
+            testLanguageOne = new Language(l);
+            
+            assertEquals(l, testLanguageOne.getName());
+            
+            testLanguageOne = new Language(l, 1);
+            
+            assertEquals(l, testLanguageOne.getName());
+        }
     }
 
     @Test
@@ -72,6 +47,13 @@ public class LanguageTest
         
         assertEquals(testLanguageOne, testLanguageTwo);
         assertFalse(testLanguageOne.deeplyEquals(testLanguageTwo));
+        assertFalse(testLanguageOne == testLanguageTwo);
+        
+        testLanguageTwo = new Language(LanguageName.ERLANG, 10);
+        testLanguageOne = testLanguageTwo.clone();
+        
+        assertEquals(testLanguageOne, testLanguageTwo);
+        assertTrue(testLanguageOne.deeplyEquals(testLanguageTwo));
         assertFalse(testLanguageOne == testLanguageTwo);
     }
 

@@ -2,7 +2,7 @@ package org.ssa.ironyard.benchmark.model;
 
 public class Language extends AbstractDomainObject implements DomainObject
 {
-    final LanguageName language;
+    private final LanguageName name;
 
     public enum LanguageName
     {
@@ -45,15 +45,15 @@ public class Language extends AbstractDomainObject implements DomainObject
         this(language, id, true);
     }
 
-    private Language(LanguageName language, Integer id, boolean loaded)
+    private Language(LanguageName name, Integer id, boolean loaded)
     {
         super(id, loaded);
-        this.language = language;
+        this.name = name;
     }
 
-    public LanguageName getLanguage()
+    public LanguageName getName()
     {
-        return language;
+        return name;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Language extends AbstractDomainObject implements DomainObject
     {
         if (this.equals(obj))
         {
-            if (this.getLanguage() != ((Language) obj).getLanguage())
+            if (this.getName() != ((Language) obj).getName())
                 return false;
             if (this.isLoaded() != obj.isLoaded())
                 return false;
@@ -106,7 +106,12 @@ public class Language extends AbstractDomainObject implements DomainObject
         if (getClass() != obj.getClass())
             return false;
         Language other = (Language) obj;
-        if (this.getId() != other.getId())
+        if(this.getId() == null)
+        {
+            if(other.getId() != null)
+                return false;
+        }
+        else if (this.getId() != other.getId())
             return false;
         return true;
     }

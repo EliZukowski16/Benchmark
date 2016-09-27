@@ -116,6 +116,13 @@ public class BenchmarkORMEagerImpl extends AbstractORM<Benchmark> implements Ben
 
         return language;
     }
+    
+    @Override
+    public String prepareReadAll()
+    {
+        //TODO: implementation
+        return null; 
+    }
 
     @Override
     public String prepareInsert()

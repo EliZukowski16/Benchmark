@@ -6,11 +6,11 @@ import java.util.Map;
 
 public class Benchmark extends AbstractDomainObject implements DomainObject
 {
-    String name;
-    Language language;
-    FrontEndServer frontEndServer;
-    Map<Threads, BigInteger> performance;
-    BigInteger errors;
+    private final String name;
+    private Language language;
+    private FrontEndServer frontEndServer;
+    private Map<Threads, BigInteger> performance;
+    private BigInteger errors;
 
     public enum Threads
     {
@@ -45,7 +45,7 @@ public class Benchmark extends AbstractDomainObject implements DomainObject
         this(name, null, false);
     }
 
-    public Benchmark(String name, Integer id)
+    public Benchmark(String name, int id)
     {
         this(name, id, true);
     }
@@ -110,7 +110,7 @@ public class Benchmark extends AbstractDomainObject implements DomainObject
     }
 
     @Override
-    public DomainObject clone()
+    public Benchmark clone()
     {
         Benchmark copy;
         try
@@ -133,17 +133,44 @@ public class Benchmark extends AbstractDomainObject implements DomainObject
     public boolean deeplyEquals(DomainObject obj)
     {
         if (this.equals(obj))
-        {
+        {   
             Benchmark other = (Benchmark) obj;
-            if (!this.getName().equals(other.getName()))
+            if(this.isLoaded() != other.isLoaded())
                 return false;
-            if (!this.getFrontEndServer().deeplyEquals(other.getFrontEndServer()))
+            
+            if(this.getName() == null)
+            {
+                if(other.getName() != null)
+                    return false;
+            }       
+            else if (!this.getName().equals(other.getName()))
                 return false;
-            if (!this.getLanguage().deeplyEquals(other.getLanguage()))
+            
+            if(this.getFrontEndServer() == null)
+            {
+                if(other.getFrontEndServer() != null)
+                    return false;
+            }
+            else if (!this.getFrontEndServer().deeplyEquals(other.getFrontEndServer()))
                 return false;
+            
+            if(this.getLanguage() == null)
+            {
+                if(other.getLanguage() != null)
+                    return false;
+            }
+            else if (!this.getLanguage().deeplyEquals(other.getLanguage()))
+                return false;
+            
             if (!this.getPerformance().equals(other.getPerformance()))
                 return false;
-            if (!this.getErrors().equals(other.getErrors()))
+            
+            if(this.getErrors() == null)
+            {
+                if(other.getErrors() != null)
+                    return false;
+            }
+            else if (!this.getErrors().equals(other.getErrors()))
                 return false;
             return true;
         }
@@ -169,7 +196,12 @@ public class Benchmark extends AbstractDomainObject implements DomainObject
         if (getClass() != obj.getClass())
             return false;
         Benchmark other = (Benchmark) obj;
-        if (!this.getId().equals(other.getId()))
+        if(this.getId() == null)
+        {
+            if(other.getId() != null)
+                return false;
+        }
+        else if (!this.getId().equals(other.getId()))
             return false;
         return true;
     }

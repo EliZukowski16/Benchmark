@@ -2,7 +2,7 @@ package org.ssa.ironyard.benchmark.model;
 
 public class FrontEndServer extends AbstractDomainObject implements DomainObject
 {
-    final FrontEndServerName frontEndServer;
+    private final FrontEndServerName frontEndServer;
     
     public enum FrontEndServerName
     {
@@ -60,7 +60,7 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
     }
 
     @Override
-    public DomainObject clone()
+    public FrontEndServer clone()
     {
         FrontEndServer copy;
         try
@@ -109,7 +109,12 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
         if (getClass() != obj.getClass())
             return false;
         FrontEndServer other = (FrontEndServer) obj;
-        if (this.getId() != other.getId())
+        if(this.getId() == null)
+        {
+            if(other.getId() != null)
+                return false;
+        }
+        else if (this.getId() != other.getId())
             return false;
         return true;
     }
