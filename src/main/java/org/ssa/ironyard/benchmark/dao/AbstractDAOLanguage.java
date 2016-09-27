@@ -11,7 +11,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.ssa.ironyard.benchmark.dao.orm.ORM;
-import org.ssa.ironyard.benchmark.dao.orm.ORMLanguage;
 import org.ssa.ironyard.benchmark.model.Language;
 import org.ssa.ironyard.benchmark.model.Language.LanguageName;
 

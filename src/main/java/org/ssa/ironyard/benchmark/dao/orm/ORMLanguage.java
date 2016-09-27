@@ -23,13 +23,13 @@ public interface ORMLanguage extends ORM<Language>
         return new Language(LanguageName.getInstance(results.getString("language")), results.getInt("id"));
     }
     
-    default String prepareInsert()
-    {
-        return "INSERT INTO " + this.table() + " (language) VALUES (?) ";
-    }
+//    default String prepareInsert()
+//    {
+//        return "INSERT INTO " + this.table() + " (language) VALUES (?) ";
+//    }
     
-    default String prepareUpdate()
-    {
-        return "UPDATE " + table() + " SET language = ?, WHERE id = ?";
-    }
+//    default String prepareUpdate()
+//    {
+//        return "UPDATE " + table() + " SET language = ?, WHERE id = ?";
+//    }
 }

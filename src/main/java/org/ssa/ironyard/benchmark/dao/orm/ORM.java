@@ -45,4 +45,10 @@ public interface ORM<T extends DomainObject>
     public List<String> getFields();
     
     public Map<String, String> getForeignKeys();
+
+    void addField(String field);
+
+    void addPrimaryKey(String primaryKey);
+
+    void addForeignKey(String foreignKeyTable, String foreignKeyName);
 }
