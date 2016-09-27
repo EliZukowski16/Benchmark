@@ -1,4 +1,4 @@
-package org.ssa.ironyard.benchmark.dao;
+package org.ssa.ironyard.benchmark.dao.orm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,15 +9,21 @@ import org.ssa.ironyard.benchmark.model.DomainObject;
 
 public interface ORM<T extends DomainObject>
 {
-    String projection();
+    public String projection();
 
-    String table();
+    public String table();
 
-    T map(ResultSet results) throws SQLException;
+    public T map(ResultSet results) throws SQLException;
 
-    String prepareInsert();
+    public String prepareInsert();
 
-    String prepareUpdate();
+    public String prepareUpdate();
+    
+    public String prepareQuery();
+    
+    public void setQueryField(String query);
+    
+    public String getQueryField();
 
     default String prepareReadAll()
     {

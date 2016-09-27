@@ -1,24 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.ssa.ironyard.benchmark.model.LanguageTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE! - in org.ssa.ironyard.benchmark.model.LanguageTest
-testLanguageLanguageName(org.ssa.ironyard.benchmark.model.LanguageTest)  Time elapsed: 0.001 sec  <<< FAILURE!
-java.lang.AssertionError: Not yet implemented
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.ssa.ironyard.benchmark.model.LanguageTest.testLanguageLanguageName(LanguageTest.java:46)
-
-testGetLanguage(org.ssa.ironyard.benchmark.model.LanguageTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: Not yet implemented
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.ssa.ironyard.benchmark.model.LanguageTest.testGetLanguage(LanguageTest.java:58)
-
-testLanguageLanguageNameInteger(org.ssa.ironyard.benchmark.model.LanguageTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: Not yet implemented
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.ssa.ironyard.benchmark.model.LanguageTest.testLanguageLanguageNameInteger(LanguageTest.java:52)
-
-testHashCode(org.ssa.ironyard.benchmark.model.LanguageTest)  Time elapsed: 0 sec  <<< FAILURE!
-java.lang.AssertionError: Not yet implemented
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.ssa.ironyard.benchmark.model.LanguageTest.testHashCode(LanguageTest.java:40)
-
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec - in org.ssa.ironyard.benchmark.model.LanguageTest

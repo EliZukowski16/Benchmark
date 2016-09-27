@@ -1,4 +1,4 @@
-package org.ssa.ironyard.benchmark.dao;
+package org.ssa.ironyard.benchmark.dao.orm;
 
 import java.math.BigInteger;
 import java.sql.ResultSet;
@@ -15,19 +15,18 @@ import org.ssa.ironyard.benchmark.model.FrontEndServer.FrontEndServerName;
 import org.ssa.ironyard.benchmark.model.Language;
 import org.ssa.ironyard.benchmark.model.Language.LanguageName;
 
-public class BenchmarkORMEagerImpl extends AbstractORM<Benchmark> implements BenchmarkORM
+public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORMBenchmark
 {
-    private final List<String> fields;
     private final List<String> primaryKeys;
     private final Map<String, String> foreignKeys;
 
     private final ORM<FrontEndServer> frontEndServerORM;
     private final ORM<Language> languageORM;
 
-    public BenchmarkORMEagerImpl()
+    public ORMBenchmarkEagerImpl()
     {
-        frontEndServerORM = new FrontEndServerORMImpl();
-        languageORM = new LanguageORMImpl();
+        frontEndServerORM = new ORMFrontEndServerImpl();
+        languageORM = new ORMLanguageImpl();
 
         fields = new ArrayList<>();
         primaryKeys = new ArrayList<>();
@@ -115,25 +114,6 @@ public class BenchmarkORMEagerImpl extends AbstractORM<Benchmark> implements Ben
                 results.getInt(this.table() + "." + foreignKeys.get("language")));
 
         return language;
-    }
-    
-    @Override
-    public String prepareReadAll()
-    {
-        //TODO: implementation
-        return null; 
-    }
-
-    @Override
-    public String prepareInsert()
-    {
-        return prepareSimpleInsert(fields);
-    }
-
-    @Override
-    public String prepareUpdate()
-    {
-        return prepareSimpleUpdate(fields);
     }
 
     @Override

@@ -1,26 +1,26 @@
-package org.ssa.ironyard.benchmark.dao;
+package org.ssa.ironyard.benchmark.dao.orm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.ssa.ironyard.benchmark.model.FrontEndServer;
+import org.ssa.ironyard.benchmark.model.Language;
 
-public class FrontEndServerORMImpl extends AbstractORM<FrontEndServer> implements FrontEndServerORM
+public class ORMLanguageImpl extends AbstractORM<Language> implements ORMLanguage
 {
     private final List<String> fields;
     private final List<String> primaryKeys;
     private final Map<String, String> foreignKeys;
     
-    public FrontEndServerORMImpl()
+    public ORMLanguageImpl()
     {
         fields = new ArrayList<>();
         primaryKeys = new ArrayList<>();
         foreignKeys = new HashMap<>();
         
         primaryKeys.add("id");
-        fields.add("name");
+        fields.add("language");
     }
 
     @Override
@@ -28,7 +28,7 @@ public class FrontEndServerORMImpl extends AbstractORM<FrontEndServer> implement
     {
         return fields;
     }
-
+    
     @Override
     public List<String> getPrimaryKeys()
     {
@@ -40,5 +40,5 @@ public class FrontEndServerORMImpl extends AbstractORM<FrontEndServer> implement
     {
         return foreignKeys;
     }
-    
+
 }

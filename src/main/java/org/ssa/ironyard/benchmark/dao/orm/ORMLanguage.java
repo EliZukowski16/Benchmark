@@ -1,4 +1,4 @@
-package org.ssa.ironyard.benchmark.dao;
+package org.ssa.ironyard.benchmark.dao.orm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.ssa.ironyard.benchmark.model.Language;
 import org.ssa.ironyard.benchmark.model.Language.LanguageName;
 
-public interface LanguageORM extends ORM<Language>
+public interface ORMLanguage extends ORM<Language>
 {
     default String projection()
     {

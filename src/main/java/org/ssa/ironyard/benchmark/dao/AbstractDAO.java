@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
+import org.ssa.ironyard.benchmark.dao.orm.ORM;
 import org.ssa.ironyard.benchmark.model.DomainObject;
-import org.ssa.ironyard.benchmark.dao.ORM;
 
 public abstract class AbstractDAO<T extends DomainObject> implements DAO<T>
 {

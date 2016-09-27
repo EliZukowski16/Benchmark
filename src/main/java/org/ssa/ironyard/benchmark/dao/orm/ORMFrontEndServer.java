@@ -1,4 +1,4 @@
-package org.ssa.ironyard.benchmark.dao;
+package org.ssa.ironyard.benchmark.dao.orm;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.ssa.ironyard.benchmark.model.FrontEndServer;
 import org.ssa.ironyard.benchmark.model.FrontEndServer.FrontEndServerName;
 
-public interface FrontEndServerORM extends ORM<FrontEndServer>
+public interface ORMFrontEndServer extends ORM<FrontEndServer>
 {
     default String projection()
     {

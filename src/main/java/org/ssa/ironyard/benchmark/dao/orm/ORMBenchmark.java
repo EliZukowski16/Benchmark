@@ -1,4 +1,4 @@
-package org.ssa.ironyard.benchmark.dao;
+package org.ssa.ironyard.benchmark.dao.orm;
 
 import java.math.BigInteger;
 import java.sql.ResultSet;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.ssa.ironyard.benchmark.model.Benchmark;
 import org.ssa.ironyard.benchmark.model.Benchmark.Threads;
 
-public interface BenchmarkORM extends ORM<Benchmark>
+public interface ORMBenchmark extends ORM<Benchmark>
 {
     default String projection()
     {
