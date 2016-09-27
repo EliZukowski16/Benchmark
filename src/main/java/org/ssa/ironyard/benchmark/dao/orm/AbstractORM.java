@@ -71,14 +71,6 @@ public abstract class AbstractORM<T extends DomainObject> implements ORM<T>
     }
     
     @Override
-    public String prepareQuery()
-    {
-        return " SELECT " + projection() + " FROM " + table() + " WHERE " + this.queryField + " = ? ";
-    }
-    
-    
-    
-    @Override
     public String prepareUpdate()
     {
         String fieldNames = " SET ";

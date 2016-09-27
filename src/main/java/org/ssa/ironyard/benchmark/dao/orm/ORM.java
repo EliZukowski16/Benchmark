@@ -19,7 +19,10 @@ public interface ORM<T extends DomainObject>
 
     public String prepareUpdate();
     
-    public String prepareQuery();
+    public default String prepareQuery()
+    {
+        return " SELECT " + projection() + " FROM " + table() + " WHERE " + getQueryField() + " = ? ";
+    }
     
     public void setQueryField(String query);
     
