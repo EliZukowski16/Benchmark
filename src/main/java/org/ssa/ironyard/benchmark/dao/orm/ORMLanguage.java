@@ -10,7 +10,7 @@ public interface ORMLanguage extends ORM<Language>
 {
     default String projection()
     {
-        return "id, language";
+        return "id, name";
     }
     
     default String table()
@@ -20,12 +20,12 @@ public interface ORMLanguage extends ORM<Language>
     
     default Language map(ResultSet results) throws SQLException
     {
-        return new Language(LanguageName.getInstance(results.getString("language")), results.getInt("id"));
+        return new Language(LanguageName.getInstance(results.getString("name")), results.getInt("id"));
     }
     
     default String prepareReadByLanguage()
     {
-        return this.prepareQuery("language");
+        return this.prepareQuery("name");
     }
     
 //    default String prepareInsert()

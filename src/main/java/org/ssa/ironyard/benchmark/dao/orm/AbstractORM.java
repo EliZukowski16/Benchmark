@@ -65,6 +65,8 @@ public abstract class AbstractORM<T extends DomainObject> implements ORM<T>
             fieldNames += (this.fields.get(i) + " = ?, ");
         }
         
+        fieldNames = fieldNames.substring(0, fieldNames.length() - 2);
+        
         return " UPDATE " + this.table() + fieldNames + " WHERE id = ? ";
     }
     
@@ -75,9 +77,13 @@ public abstract class AbstractORM<T extends DomainObject> implements ORM<T>
         String values = " VALUES ( ";
         for(int i = 0; i <this.fields.size(); i++)
         {
-            fieldNames += (this.fields.get(i)) + " , ";
-            values += " ?, ";
+            fieldNames += (this.fields.get(i)) + ", ";
+            values += "?, ";
         }
+        
+        fieldNames = fieldNames.substring(0, fieldNames.length() - 2);
+        values = values.substring(0, values.length() - 2);
+        
         fieldNames += " ) ";
         values += " ) ";
         

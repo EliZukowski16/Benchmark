@@ -31,7 +31,7 @@ public interface ORM<T extends DomainObject>
 
     default String prepareReadById()
     {
-        return " SELECT " + projection() + " FROM " + table() + "WHERE id = ? ";
+        return " SELECT " + projection() + " FROM " + table() + " WHERE id = ? ";
     }
 
     default String prepareDelete()

@@ -6,11 +6,13 @@ public class Language extends AbstractDomainObject implements DomainObject
 
     public enum LanguageName
     {
-        JAVA("java"), C("c"), C_SHARP("c-sharp"), C_PLUS_PLUS("c-plus-plus"), CLOJURE("clojure"), CRYSTAL("crystal"), D(
-                "d"), DART("dart"), ELIXIR("elixir"), ERLANG("erlang"), GO("go"), GROOVY("groovy"), HASKELL(
-                        "haskell"), JAVASCRIPT("javascript"), LUA("lua"), NIM("nim"), PERL("perl"), PHP("php"), PHP5(
-                                "php5"), PYTHON("python"), RACKET(
-                                        "racket"), RUBY("ruby"), RUST("rust"), SCALA("scala"), UR("ur");
+        JAVA("Java"), C("C"), C_SHARP("C#"), C_PLUS_PLUS("C++"), 
+        CLOJURE("Clojure"), CRYSTAL("Crystal"), D("D"), DART("Dart"), 
+        ELIXIR("Elixir"), ERLANG("Erlang"), GO("Go"), GROOVY("Groovy"), 
+        HASKELL("Haskell"), JAVASCRIPT("JavaScript"), LUA("Lua"), 
+        NIM("Nim"), PERL("Perl"), PHP("PHP"), PHP5("PHP5"), 
+        PYTHON("Python"), RACKET("Racket"), RUBY("Ruby"), RUST("rust"), 
+        SCALA("Scala"), UR("Ur");
 
         private String language;
 
@@ -33,6 +35,11 @@ public class Language extends AbstractDomainObject implements DomainObject
             }
             return null;
         }
+    }
+
+    public Language()
+    {
+        this(null, null, false);
     }
 
     public Language(LanguageName language)
@@ -77,8 +84,7 @@ public class Language extends AbstractDomainObject implements DomainObject
     {
         if (this.equals(obj))
         {
-            if (this.getLanguage() != ((Language) obj).getLanguage())
-                return false;
+            
             if (this.isLoaded() != obj.isLoaded())
                 return false;
             return true;
@@ -105,12 +111,22 @@ public class Language extends AbstractDomainObject implements DomainObject
         if (getClass() != obj.getClass())
             return false;
         Language other = (Language) obj;
-        if(this.getId() == null)
+        if (this.getId() == null)
         {
-            if(other.getId() != null)
+            if (other.getId() != null)
                 return false;
         }
-        else if (this.getId() != other.getId())
+        else if (!this.getId().equals(other.getId()))
+        {
+            return false;
+        }
+        
+        if (this.getLanguage() == null)
+        {
+            if (other.getLanguage() != null)
+                return false;
+        }
+        else if (this.getLanguage() != ((Language) obj).getLanguage())
             return false;
         return true;
     }

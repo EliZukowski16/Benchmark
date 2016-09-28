@@ -114,7 +114,7 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
             if(other.getId() != null)
                 return false;
         }
-        else if (this.getId() != other.getId())
+        else if (!this.getId().equals(other.getId()))
             return false;
         return true;
     }

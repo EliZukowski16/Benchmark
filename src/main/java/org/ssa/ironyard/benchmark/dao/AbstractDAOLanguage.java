@@ -39,7 +39,7 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
             results = insertStmt.getGeneratedKeys();
             if (results.next())
             {
-                Language returnLanguage = new Language(domain.getLanguage(), results.getInt("id"));
+                Language returnLanguage = new Language(domain.getLanguage(), results.getInt(1));
 
                 return returnLanguage;
             }
@@ -108,7 +108,7 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
             results = readStmt.executeQuery();
             while (results.next())
             {
-                Language returnLanguage = new Language(LanguageName.getInstance(results.getString("language")),
+                Language returnLanguage = new Language(LanguageName.getInstance(results.getString("name")),
                         results.getInt("id"));
 
                 languages.add(returnLanguage);

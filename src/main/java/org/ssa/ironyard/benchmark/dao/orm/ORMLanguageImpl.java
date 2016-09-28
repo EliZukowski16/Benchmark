@@ -7,6 +7,6 @@ public class ORMLanguageImpl extends AbstractORM<Language> implements ORMLanguag
     public ORMLanguageImpl()
     {    
         primaryKeys.add("id");
-        fields.add("language");
+        fields.add("name");
     }
 }
