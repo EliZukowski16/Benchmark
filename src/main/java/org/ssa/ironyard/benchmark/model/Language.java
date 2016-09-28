@@ -19,7 +19,7 @@ public class Language extends AbstractDomainObject implements DomainObject
             this.language = language;
         }
 
-        public String getLanguage()
+        public String getName()
         {
             return this.language;
         }
@@ -51,7 +51,7 @@ public class Language extends AbstractDomainObject implements DomainObject
         this.name = name;
     }
 
-    public LanguageName getName()
+    public LanguageName getLanguage()
     {
         return name;
     }
@@ -67,7 +67,6 @@ public class Language extends AbstractDomainObject implements DomainObject
         }
         catch (CloneNotSupportedException e)
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
@@ -78,7 +77,7 @@ public class Language extends AbstractDomainObject implements DomainObject
     {
         if (this.equals(obj))
         {
-            if (this.getName() != ((Language) obj).getName())
+            if (this.getLanguage() != ((Language) obj).getLanguage())
                 return false;
             if (this.isLoaded() != obj.isLoaded())
                 return false;

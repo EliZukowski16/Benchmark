@@ -11,6 +11,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.ssa.ironyard.benchmark.dao.orm.ORM;
+import org.ssa.ironyard.benchmark.dao.orm.ORMLanguage;
 import org.ssa.ironyard.benchmark.model.Language;
 import org.ssa.ironyard.benchmark.model.Language.LanguageName;
 
@@ -33,12 +34,12 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
         {
             connection = datasource.getConnection();
             insertStmt = connection.prepareStatement(this.orm.prepareInsert(), Statement.RETURN_GENERATED_KEYS);
-            insertStmt.setString(1, domain.getName().getLanguage());
+            insertStmt.setString(1, domain.getLanguage().getName());
             insertStmt.executeUpdate();
             results = insertStmt.getGeneratedKeys();
             if (results.next())
             {
-                Language returnLanguage = new Language(domain.getName(), results.getInt("id"));
+                Language returnLanguage = new Language(domain.getLanguage(), results.getInt("id"));
 
                 return returnLanguage;
             }
@@ -66,7 +67,7 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
         {
             connection = datasource.getConnection();
             updateStmt = connection.prepareStatement(this.orm.prepareUpdate(), Statement.RETURN_GENERATED_KEYS);
-            updateStmt.setString(1, domain.getName().getLanguage());
+            updateStmt.setString(1, domain.getLanguage().getName());
             updateStmt.setInt(2, domain.getId());
             if (updateStmt.executeUpdate() > 0)
             {
@@ -137,12 +138,10 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
         ResultSet results = null;
 
         try
-        {
-            this.orm.setQueryField("language");
-            
+        {   
             connection = datasource.getConnection();
-            readStmt = connection.prepareStatement(this.orm.prepareQuery());
-            readStmt.setString(1, domain.getName().getLanguage());
+            readStmt = connection.prepareStatement(((ORMLanguage) this.orm).prepareReadByLanguage());
+            readStmt.setString(1, domain.getLanguage().getName());
             results = readStmt.executeQuery();
             while (results.next())
             {

@@ -6,6 +6,6 @@ import org.ssa.ironyard.benchmark.model.Language;
 
 public interface DAOLanguage extends DAO<Language>
 {
-    List<Language> read();
-    List<Language> readByLanguage(Language language);
+    public List<Language> read();
+    public List<Language> readByLanguage(Language language);
 }

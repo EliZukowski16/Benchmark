@@ -17,9 +17,6 @@ import org.ssa.ironyard.benchmark.model.Language.LanguageName;
 
 public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORMBenchmark
 {
-    private final List<String> primaryKeys;
-    private final Map<String, String> foreignKeys;
-
     private final ORM<FrontEndServer> frontEndServerORM;
     private final ORM<Language> languageORM;
 
@@ -27,10 +24,6 @@ public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORM
     {
         frontEndServerORM = new ORMFrontEndServerImpl();
         languageORM = new ORMLanguageImpl();
-
-        fields = new ArrayList<>();
-        primaryKeys = new ArrayList<>();
-        foreignKeys = new HashMap<>();
 
         primaryKeys.add("id");
 

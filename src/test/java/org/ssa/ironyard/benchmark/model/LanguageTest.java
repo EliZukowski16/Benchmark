@@ -20,16 +20,16 @@ public class LanguageTest
         {
             testLanguageOne = new Language(null);
             
-            assertNotEquals(l, testLanguageOne.getName());
-            assertEquals(null, testLanguageOne.getName());
+            assertNotEquals(l, testLanguageOne.getLanguage());
+            assertEquals(null, testLanguageOne.getLanguage());
             
             testLanguageOne = new Language(l);
             
-            assertEquals(l, testLanguageOne.getName());
+            assertEquals(l, testLanguageOne.getLanguage());
             
             testLanguageOne = new Language(l, 1);
             
-            assertEquals(l, testLanguageOne.getName());
+            assertEquals(l, testLanguageOne.getLanguage());
         }
     }
 

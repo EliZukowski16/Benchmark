@@ -23,6 +23,11 @@ public interface ORMFrontEndServer extends ORM<FrontEndServer>
         return new FrontEndServer(FrontEndServerName.getInstance(results.getString("name")), results.getInt("id"));
     }
     
+    default String prepareReadByFrontEndServerName()
+    {
+        return this.prepareQuery("name");
+    }
+    
 //    default String prepareInsert()
 //    {
 //        return "INSERT INTO " + this.table() + " (name) VALUES (?) ";

@@ -22,7 +22,7 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
             this.frontEndServer = frontEndServer;
         }
         
-        public String getFrontEndServer()
+        public String getName()
         {
             return this.frontEndServer;
         }

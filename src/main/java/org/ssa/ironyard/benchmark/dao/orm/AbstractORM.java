@@ -9,10 +9,9 @@ import org.ssa.ironyard.benchmark.model.DomainObject;
 
 public abstract class AbstractORM<T extends DomainObject> implements ORM<T>
 {
-    protected String queryField;
-    protected List<String> fields;
-    protected List<String> primaryKeys;
-    protected Map<String, String> foreignKeys;
+    protected final List<String> fields;
+    protected final List<String> primaryKeys;
+    protected final Map<String, String> foreignKeys;
     
     public AbstractORM()
     {
@@ -55,19 +54,6 @@ public abstract class AbstractORM<T extends DomainObject> implements ORM<T>
     public void addForeignKey(String foreignKeyTable, String foreignKeyName)
     {
         foreignKeys.put(foreignKeyTable, foreignKeyName);
-    }
-    
-    @Override
-    public String getQueryField()
-    {
-        return queryField;
-    }
-    
-    @Override
-    public void setQueryField(String query)
-    {
-        queryField = "";
-        queryField = query;
     }
     
     @Override
