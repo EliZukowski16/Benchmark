@@ -75,8 +75,7 @@ public abstract class AbstractDAOFrontEndServer extends AbstractDAO<FrontEndServ
             results = readStmt.executeQuery();
             while (results.next())
             {
-                FrontEndServer returnServer = new FrontEndServer(FrontEndServerName.getInstance(results.getString("name")),
-                        results.getInt("id"));
+                FrontEndServer returnServer = this.orm.map(results);
 
                 servers.add(returnServer);
             }
@@ -112,8 +111,7 @@ public abstract class AbstractDAOFrontEndServer extends AbstractDAO<FrontEndServ
             results = readStmt.executeQuery();
             while (results.next())
             {
-                FrontEndServer returnServer = new FrontEndServer(FrontEndServerName.getInstance(results.getString("name")),
-                        results.getInt("id"));
+                FrontEndServer returnServer = this.orm.map(results);
 
                 servers.add(returnServer);
             }

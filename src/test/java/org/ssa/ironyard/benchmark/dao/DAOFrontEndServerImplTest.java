@@ -81,7 +81,7 @@ public class DAOFrontEndServerImplTest extends AbstractDAOTest<FrontEndServer>
 
         this.dataSource = mysqlDdataSource;
 
-        this.serverDAO = new DAOFrontEndServerImpl(dataSource, new ORMFrontEndServerImpl());
+        this.serverDAO = new DAOFrontEndServerImpl(dataSource);
         
         serverDAO.clear();
         
@@ -146,7 +146,7 @@ public class DAOFrontEndServerImplTest extends AbstractDAOTest<FrontEndServer>
         
         this.dataSource = mysqlDdataSource;
 
-        this.serverDAO = new DAOFrontEndServerImpl(dataSource, new ORMFrontEndServerImpl());
+        this.serverDAO = new DAOFrontEndServerImpl(dataSource);
         
         return serverDAO;
     }

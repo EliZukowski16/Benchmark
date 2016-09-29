@@ -2,15 +2,14 @@ package org.ssa.ironyard.benchmark.dao;
 
 import javax.sql.DataSource;
 
-import org.ssa.ironyard.benchmark.dao.orm.ORM;
-import org.ssa.ironyard.benchmark.model.FrontEndServer;
+import org.ssa.ironyard.benchmark.dao.orm.ORMFrontEndServerImpl;
 
 public class DAOFrontEndServerImpl extends AbstractDAOFrontEndServer implements DAOFrontEndServer
 {
 
-    protected DAOFrontEndServerImpl(DataSource datasource, ORM<FrontEndServer> orm)
+    protected DAOFrontEndServerImpl(DataSource datasource)
     {
-        super(datasource, orm);
+        super(datasource, new ORMFrontEndServerImpl());
     }
 
 }

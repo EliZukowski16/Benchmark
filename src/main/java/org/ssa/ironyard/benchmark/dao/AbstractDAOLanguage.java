@@ -108,8 +108,7 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
             results = readStmt.executeQuery();
             while (results.next())
             {
-                Language returnLanguage = new Language(LanguageName.getInstance(results.getString("name")),
-                        results.getInt("id"));
+                Language returnLanguage = this.orm.map(results);
 
                 languages.add(returnLanguage);
             }
@@ -145,8 +144,7 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
             results = readStmt.executeQuery();
             while (results.next())
             {
-                Language returnLanguage = new Language(LanguageName.getInstance(results.getString("name")),
-                        results.getInt("id"));
+                Language returnLanguage = this.orm.map(results);
 
                 languages.add(returnLanguage);
             }

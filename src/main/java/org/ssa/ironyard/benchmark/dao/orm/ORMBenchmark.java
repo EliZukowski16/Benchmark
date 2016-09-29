@@ -36,4 +36,9 @@ public interface ORMBenchmark extends ORM<Benchmark>
         return benchmark;
     }
 
+    default String prepareReadByBenchmark()
+    {
+        return prepareQuery("name");
+    }
+
 }

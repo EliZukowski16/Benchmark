@@ -79,7 +79,7 @@ public class DAOLanguageImplTest extends AbstractDAOTest<Language>
 
         this.dataSource = mysqlDdataSource;
 
-        this.languageDAO = new DAOLanguageImpl(dataSource, new ORMLanguageImpl());
+        this.languageDAO = new DAOLanguageImpl(dataSource);
         
         languageDAO.clear();
         
@@ -145,7 +145,7 @@ public class DAOLanguageImplTest extends AbstractDAOTest<Language>
         
         this.dataSource = mysqlDdataSource;
 
-        this.languageDAO = new DAOLanguageImpl(dataSource, new ORMLanguageImpl());
+        this.languageDAO = new DAOLanguageImpl(dataSource);
         
         return languageDAO;
     }
