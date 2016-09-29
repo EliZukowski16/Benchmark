@@ -97,11 +97,11 @@ public class LanguageTest
         testLanguageOne = new Language(null, 1);
         testLanguageTwo = new Language(LanguageName.SCALA, 1);
         
-        assertEquals(testLanguageOne, testLanguageTwo);
+        assertNotEquals(testLanguageOne, testLanguageTwo);
         
         testLanguageOne.setLoaded(!testLanguageOne.isLoaded());
         
-        assertEquals(testLanguageOne, testLanguageTwo);
+        assertNotEquals(testLanguageOne, testLanguageTwo);
         
         testLanguageOne = new Language(LanguageName.SCALA, 2);
         

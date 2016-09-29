@@ -42,7 +42,7 @@ public abstract class AbstractDAOFrontEndServer extends AbstractDAO<FrontEndServ
             results = insertStmt.getGeneratedKeys();
             if (results.next())
             {
-                FrontEndServer returnServer = new FrontEndServer(domain.getFrontEndServer(), results.getInt("id"));
+                FrontEndServer returnServer = new FrontEndServer(domain.getFrontEndServer(), results.getInt(1));
 
                 return returnServer;
             }

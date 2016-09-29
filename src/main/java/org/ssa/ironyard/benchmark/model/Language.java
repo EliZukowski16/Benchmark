@@ -98,6 +98,7 @@ public class Language extends AbstractDomainObject implements DomainObject
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.getId() == null) ? 0 : this.getId().hashCode());
+        result = prime * result + ((this.getLanguage() == null) ? 0 : this.getLanguage().hashCode());
         return result;
     }
 

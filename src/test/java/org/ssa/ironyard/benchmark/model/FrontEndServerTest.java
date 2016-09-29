@@ -74,11 +74,11 @@ public class FrontEndServerTest
         
         assertTrue(testServerOne.deeplyEquals(testServerTwo));
         
-        testServerOne = new FrontEndServer(FrontEndServerName.IIS, 1);
+        testServerOne = new FrontEndServer(FrontEndServerName.MEINHELD, 1);
         
         assertFalse(testServerOne.deeplyEquals(testServerTwo));
         
-        testServerTwo = new FrontEndServer(FrontEndServerName.IIS, 2);
+        testServerTwo = new FrontEndServer(FrontEndServerName.MEINHELD, 2);
         
         assertFalse(testServerOne.deeplyEquals(testServerTwo));
         
@@ -96,15 +96,15 @@ public class FrontEndServerTest
     public void testEqualsObject()
     {
         testServerOne = new FrontEndServer(null, 1);
-        testServerTwo = new FrontEndServer(FrontEndServerName.HTTPSYS, 1);
+        testServerTwo = new FrontEndServer(FrontEndServerName.CHERRYPY, 1);
         
-        assertEquals(testServerOne, testServerTwo);
+        assertNotEquals(testServerOne, testServerTwo);
         
         testServerOne.setLoaded(!testServerOne.isLoaded());
         
-        assertEquals(testServerOne, testServerTwo);
+        assertNotEquals(testServerOne, testServerTwo);
         
-        testServerOne = new FrontEndServer(FrontEndServerName.HTTPSYS, 2);
+        testServerOne = new FrontEndServer(FrontEndServerName.CHERRYPY, 2);
         
         assertNotEquals(testServerOne, testServerTwo);
         
@@ -122,7 +122,7 @@ public class FrontEndServerTest
     @Test
     public void testSetLoaded()
     {
-        testServerOne = new FrontEndServer(FrontEndServerName.POCO);
+        testServerOne = new FrontEndServer(FrontEndServerName.DART);
         
         testServerOne.setLoaded(true);
         assertTrue(testServerOne.isLoaded());
@@ -148,7 +148,7 @@ public class FrontEndServerTest
         
         assertEquals(1, (int) testServerOne.getId());
         
-        testServerOne = new FrontEndServer(FrontEndServerName.WOOF, 1);
+        testServerOne = new FrontEndServer(FrontEndServerName.URWEB, 1);
         
         assertEquals(1, (int) testServerOne.getId());
     }

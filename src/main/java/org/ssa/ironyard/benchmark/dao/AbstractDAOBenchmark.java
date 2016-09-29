@@ -11,7 +11,6 @@ public abstract class AbstractDAOBenchmark extends AbstractDAO<Benchmark> implem
     protected AbstractDAOBenchmark(DataSource datasource, ORM<Benchmark> orm)
     {
         super(datasource, orm);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

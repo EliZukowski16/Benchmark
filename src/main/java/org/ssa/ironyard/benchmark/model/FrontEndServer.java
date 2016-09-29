@@ -6,15 +6,16 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
     
     public enum FrontEndServerName
     {
-        BLAZE("blaze"), COWBOY("cowboy"), GRIZZLY("grizzly"), GUNICORN("gunicorn"), HPHP("hphp"),
-        HTTPSYS("httpsys"), HYPER("hyper"), HYPNOTOAD("hypnotoad"), IIS("iis"), JETTY("jetty"),
-        LWAN("lwan"), MEINHELD("meinheld"), MONGREL2("mongrel2"), MONKEY("monkey"), NETTY("netty"),
-        NGINX("nginx"), NGINXUWSGI("nginxuwsgi"), NONE("none"), POCO("poco"), PUMA("puma"),
-        RESIN("resin"), SPRAY("spray"), STARMAN("starman"), THIN("thin"), TOMCAT("tomcat"), 
-        TORNADO("tornado"), TORQBOX("torqbox"), TRINIDAD("trinidad"), UNDERTOW("undertow"),
-        UNICORN("unicorn"), USERVER_TCP("userver_tcp"), UWSGI("uwsgi"), WARP("warp"), 
-        WILDFLY("wildfly"), WOOF("woof"), XSP("xsp");
-        
+        AKKA("Akka"), APACHE("Apache"), BLAZE("blaze"), CHERRYPY("CherryPy"), COWBOY("Cowboy"),
+        CPOLL("CPoll"), D("D"), DART("Dart"), ELLI("Elli"), GEMINI("Gemini"), GO("Go"), 
+        GRIZZLY("Grizzly"), GUNICORN("Gunicorn"), HPHP("HPHP"), HTTP_KIT("http-kit"), HYPER("hyper"),
+        HYPNOTOAD("Hypnotoad"), IMMUTANT("Immutant"), JETTY("Jetty"), LWAN("Lwan"), MEINHELD("Meinheld"),
+        MONKEY("Monkey"), NETTY("Netty"), NGINX("nginx"), NODEJS("NodeJS"), ONION("Onion"), PUMA("Puma"),
+        RACKET("Racket"), RESIN("Resin"), SNAP("Snap"), SPRAY("Spray"), STARMAN("Starman"), THIN("Thin"),
+        TOMCAT("Tomcat"), TORNADO("Tornado"), TORQBOX("TorqBox"), TRINIDAD("Trinidad"), TWISTED("Twisted"),
+        UNDERTOW("Undertow"), UNDERTOW_EDGE("Undertow Edge"), UNICORN("Unicorn"), URWEB("Ur/Web"),
+        VERTX("Vertx"), WARP("Warp"), WEB2PY("web2Py"), WILDFLY("Wildfly"), WT("Wt");
+          
         private String frontEndServer;
         
         private FrontEndServerName(String frontEndServer)
@@ -81,8 +82,6 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
     {
         if(this.equals(obj))
         {
-            if(this.getFrontEndServer() != ((FrontEndServer) obj).getFrontEndServer())
-                return false;
             if(this.isLoaded() != obj.isLoaded())
                 return false;
             return true;
@@ -96,6 +95,7 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.getId() == null) ? 0 : this.getId().hashCode());
+        result = prime * result + ((this.getFrontEndServer() == null) ? 0 : this.getFrontEndServer().hashCode());
         return result;
     }
 
@@ -115,6 +115,14 @@ public class FrontEndServer extends AbstractDomainObject implements DomainObject
                 return false;
         }
         else if (!this.getId().equals(other.getId()))
+            return false;
+        
+        if(this.getFrontEndServer() == null)
+        {
+            if(other.getFrontEndServer() != null)
+                return false;
+        }
+        else if(this.getFrontEndServer() != ((FrontEndServer) obj).getFrontEndServer())
             return false;
         return true;
     }

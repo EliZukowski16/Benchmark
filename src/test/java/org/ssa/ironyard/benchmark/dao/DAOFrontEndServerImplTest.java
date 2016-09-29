@@ -16,30 +16,32 @@ import java.util.Set;
 import javax.sql.DataSource;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.ssa.ironyard.benchmark.dao.orm.ORMLanguageImpl;
-import org.ssa.ironyard.benchmark.model.Language;
-import org.ssa.ironyard.benchmark.model.Language.LanguageName;
+import org.ssa.ironyard.benchmark.dao.orm.ORMFrontEndServerImpl;
+import org.ssa.ironyard.benchmark.model.FrontEndServer;
+import org.ssa.ironyard.benchmark.model.FrontEndServer;
+import org.ssa.ironyard.benchmark.model.FrontEndServer.FrontEndServerName;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
-public class DAOLanguageImplTest extends AbstractDAOTest<Language>
+public class DAOFrontEndServerImplTest extends AbstractDAOTest<FrontEndServer>
 {
     static String URL = "jdbc:mysql://localhost/framework_benchmarks?user=root&password=root&useServerPrpStmts=true";
     DataSource dataSource;
-    AbstractDAO<Language> languageDAO;
-    Language testLanguage;
-    static Set<Language> rawTestLanguages;
-    List<Language> languagesInDB;
-    List<String> languageNames;
+    AbstractDAO<FrontEndServer> serverDAO;
+    FrontEndServer testLanguage;
+    static Set<FrontEndServer> rawTestServers;
+    List<FrontEndServer> serversInDB;
+    List<String> serverNames;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception
     {
         BufferedReader reader = null;
-        rawTestLanguages = new HashSet<>();
+        rawTestServers = new HashSet<>();
         
         try
         {
@@ -52,9 +54,9 @@ public class DAOLanguageImplTest extends AbstractDAOTest<Language>
             while (null !=(line = reader.readLine()))
             {
                 String[] benchmarks = line.split(",");
-                Language language = new Language(LanguageName.getInstance(benchmarks[1]));
+                FrontEndServer server = new FrontEndServer(FrontEndServerName.getInstance(benchmarks[2]));
                 
-                rawTestLanguages.add(language);
+                rawTestServers.add(server);
 
             }
         }
@@ -72,88 +74,87 @@ public class DAOLanguageImplTest extends AbstractDAOTest<Language>
     }
 
     @Before
-    public void setUpLanguageTests() throws Exception
+    public void setUpFrontEndServerTests() throws Exception
     {
         MysqlDataSource mysqlDdataSource = new MysqlDataSource();
         mysqlDdataSource.setURL(URL);
 
         this.dataSource = mysqlDdataSource;
 
-        this.languageDAO = new DAOLanguageImpl(dataSource, new ORMLanguageImpl());
+        this.serverDAO = new DAOFrontEndServerImpl(dataSource, new ORMFrontEndServerImpl());
         
-        languageDAO.clear();
+        serverDAO.clear();
         
-        languagesInDB = new ArrayList<>();
-        languageNames = new ArrayList<>();
+        serversInDB = new ArrayList<>();
+        serverNames = new ArrayList<>();
     }
 
     @After
     public void tearDown() throws Exception
     {
-        languageDAO.clear();
+        serverDAO.clear();
     }
 
     @Test
-    public void testReadAllLanguages()
-    {   
-        for(Language l : rawTestLanguages)
+    public void testReadAllServers()
+    {
+        for(FrontEndServer f : rawTestServers)
         {
-            languageDAO.insert(l);
-            languageNames.add(l.getLanguage().getName());
+            serverDAO.insert(f);
+            serverNames.add(f.getFrontEndServer().getName());
         }
         
-        languagesInDB = ((DAOLanguageImpl) languageDAO).read();
+        serversInDB = ((DAOFrontEndServerImpl) serverDAO).read();
         
-        assertTrue(languagesInDB.size() == rawTestLanguages.size());
+        assertTrue(serversInDB.size() == rawTestServers.size());
         
-        for(Language l : languagesInDB)
+        for(FrontEndServer l : serversInDB)
         {
             assertTrue(l.getId() != null);
             assertTrue(l.isLoaded());
-            assertTrue(languageNames.contains(l.getLanguage().getName()));
+            assertTrue(serverNames.contains(l.getFrontEndServer().getName()));
         }
-        
     }
-
+    
     @Test
-    public void testReadByLanguage()
+    public void testReadByFrontEndServer()
     {   
-        for(Language l : rawTestLanguages)
+        for(FrontEndServer f : rawTestServers)
         {
-            languagesInDB = new ArrayList<>();
-            languageDAO.insert(l);
-            languageNames.add(l.getLanguage().getName());
-            languagesInDB = ((DAOLanguageImpl)languageDAO).readByLanguage(l);
+            serversInDB = new ArrayList<>();
+            serverDAO.insert(f);
+            serverNames.add(f.getFrontEndServer().getName());
+            serversInDB = ((DAOFrontEndServerImpl)serverDAO).readByFrontEndServer(f);
             
-            assertEquals(1, languagesInDB.size());
+            assertEquals(1, serversInDB.size());
             
-            for(Language k : languagesInDB)
+            for(FrontEndServer k : serversInDB)
             {
                 assertTrue(k.getId() != null);
                 assertTrue(k.isLoaded());
-                assertTrue(k.getLanguage().equals(l.getLanguage()));
-                assertFalse(k.equals(l));
+                assertTrue(k.getFrontEndServer().equals(f.getFrontEndServer()));
+                assertFalse(k.equals(f));
             }         
         }
     }
 
     @Override
-    protected AbstractDAO<Language> getDAO()
+    protected AbstractDAO<FrontEndServer> getDAO()
     {
         MysqlDataSource mysqlDdataSource = new MysqlDataSource();
         mysqlDdataSource.setURL(URL);
         
         this.dataSource = mysqlDdataSource;
 
-        this.languageDAO = new DAOLanguageImpl(dataSource, new ORMLanguageImpl());
+        this.serverDAO = new DAOFrontEndServerImpl(dataSource, new ORMFrontEndServerImpl());
         
-        return languageDAO;
+        return serverDAO;
     }
 
     @Override
-    protected Language newInstance()
+    protected FrontEndServer newInstance()
     {
-        return new Language(LanguageName.C);
+        return new FrontEndServer(FrontEndServerName.BLAZE);
     }
 
 }

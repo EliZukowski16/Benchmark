@@ -145,7 +145,7 @@ public abstract class AbstractDAOLanguage extends AbstractDAO<Language> implemen
             results = readStmt.executeQuery();
             while (results.next())
             {
-                Language returnLanguage = new Language(LanguageName.getInstance(results.getString("language")),
+                Language returnLanguage = new Language(LanguageName.getInstance(results.getString("name")),
                         results.getInt("id"));
 
                 languages.add(returnLanguage);
