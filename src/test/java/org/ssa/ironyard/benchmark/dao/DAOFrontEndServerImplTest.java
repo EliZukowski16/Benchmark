@@ -32,7 +32,7 @@ public class DAOFrontEndServerImplTest extends AbstractDAOTest<FrontEndServer>
     static String URL = "jdbc:mysql://localhost/framework_benchmarks?user=root&password=root&useServerPrpStmts=true";
     DataSource dataSource;
     AbstractDAO<FrontEndServer> serverDAO;
-    FrontEndServer testLanguage;
+    FrontEndServer testServer;
     static Set<FrontEndServer> rawTestServers;
     List<FrontEndServer> serversInDB;
     List<String> serverNames;
@@ -106,7 +106,7 @@ public class DAOFrontEndServerImplTest extends AbstractDAOTest<FrontEndServer>
         
         serversInDB = ((DAOFrontEndServerImpl) serverDAO).read();
         
-        assertTrue(serversInDB.size() == rawTestServers.size());
+        assertEquals(serversInDB.size(), rawTestServers.size());
         
         for(FrontEndServer l : serversInDB)
         {

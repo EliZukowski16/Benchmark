@@ -6,7 +6,7 @@ public class ORMFrontEndServerImpl extends AbstractORM<FrontEndServer> implement
 {
     public ORMFrontEndServerImpl()
     {        
-        primaryKeys.add("id");
-        fields.add("name");
+        this.primaryKeys.add("id");
+        this.fields.add("name");
     }
 }

@@ -47,22 +47,25 @@ public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORM
     {
         String projection = " ";
         for (int i = 0; i < primaryKeys.size(); i++)
-            projection += this.table() + "." + primaryKeys.get(i) + ", ";
+            projection = projection + this.table() + "." + primaryKeys.get(i) + ", ";
 
         for (int i = 0; i < fields.size(); i++)
-            projection += this.table() + "." + fields.get(i) + ", ";
+            projection = projection + this.table() + "." + fields.get(i) + ", ";
 
         for (int i = 0; i < languageORM.getFields().size(); i++)
-            projection += languageORM.table() + "." + languageORM.getFields().get(i) + ", ";
+            projection = projection + languageORM.table() + "." + languageORM.getFields().get(i) + ", ";
 
         for (int i = 0; i < frontEndServerORM.getFields().size(); i++)
-            projection += frontEndServerORM.table() + "." + frontEndServerORM.getFields().get(i) + ", ";
+            projection = projection + frontEndServerORM.table() + "." + frontEndServerORM.getFields().get(i) + ", ";
+
+        projection = projection.substring(0, projection.length() - 2);
 
         return projection;
     }
 
     public Benchmark mapBenchmark(ResultSet results) throws SQLException
     {
+
         Benchmark benchmark;
         benchmark = new Benchmark(results.getString(this.table() + "." + this.getFields().get(0)),
                 results.getInt(this.table() + "." + this.getPrimaryKeys().get(0)));
@@ -85,6 +88,7 @@ public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORM
 
     private FrontEndServer mapFrontEndServer(ResultSet results) throws SQLException
     {
+
         FrontEndServer frontEndServer;
 
         FrontEndServerName name = FrontEndServerName
@@ -98,13 +102,13 @@ public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORM
 
     private Language mapLanguage(ResultSet results) throws SQLException
     {
+
         Language language;
 
         LanguageName name = LanguageName
                 .getInstance(results.getString(languageORM.table() + "." + languageORM.getFields().get(0)));
 
-        language = new Language(name,
-                results.getInt(this.table() + "." + foreignKeys.get("language")));
+        language = new Language(name, results.getInt(this.table() + "." + foreignKeys.get("languages")));
 
         return language;
     }
@@ -127,27 +131,67 @@ public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORM
         return foreignKeys;
     }
 
+    @Override
+    public String prepareReadAll()
+    {
+        return " SELECT " + projection() + " FROM " + this.table() + this.prepareJoin();
+    }
+
+    @Override
+    public String prepareReadById()
+    {
+        return " SELECT " + this.projection() + " FROM " + this.table() + this.prepareJoin() + " WHERE " + this.table()
+                + ".id = ? ";
+    }
+
+    @Override
+    public String prepareReadByBenchmark()
+    {
+        return " SELECT " + this.projection() + " FROM " + this.table() + this.prepareJoin() + " WHERE " + this.table()
+                + ".name = ? ";
+    }
+
+    @Override
+    public String prepareReadByLanguage()
+    {
+        return " SELECT " + this.projection() + " FROM " + this.table() + this.prepareJoin() + " WHERE " + this.table()
+                + ".language = ? ";
+    }
+
+    @Override
+    public String prepareReadByFrontEndServer()
+    {
+        return " SELECT " + this.projection() + " FROM " + this.table() + this.prepareJoin() + " WHERE " + this.table()
+                + ".front_end_server = ? ";
+    }
+
+    private String prepareJoin()
+    {
+        return this.joinLanguage() + this.relationshipLanguage() + this.joinFrontEndServer()
+                + this.relationshipFrontEndServer();
+    }
+
     private String joinLanguage()
     {
-        return " " + this.table() + " JOIN " + languageORM.table() + " ";
+        return " " + "JOIN " + languageORM.table() + " ";
     }
 
     private String joinFrontEndServer()
     {
-        return " " + this.table() + " JOIN " + frontEndServerORM.table() + " ";
+        return " " + " JOIN " + frontEndServerORM.table() + " ";
     }
 
     private String relationshipLanguage()
     {
         // Works for now, but need to generalize this expression
-        return " " + this.table() + "." + this.getForeignKeys().get(languageORM.table()) + " = " + languageORM.table()
-                + "." + languageORM.getPrimaryKeys().get(0);
+        return " ON " + this.table() + "." + this.getForeignKeys().get(languageORM.table()) + " = "
+                + languageORM.table() + "." + languageORM.getPrimaryKeys().get(0);
     }
 
     private String relationshipFrontEndServer()
     {
         // Works for now, but need to generalize this expression
-        return " " + this.table() + "." + this.getForeignKeys().get(frontEndServerORM.table()) + " = "
+        return " ON " + this.table() + "." + this.getForeignKeys().get(frontEndServerORM.table()) + " = "
                 + frontEndServerORM.table() + "." + frontEndServerORM.getPrimaryKeys().get(0);
     }
 

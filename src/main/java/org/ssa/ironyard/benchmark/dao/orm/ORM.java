@@ -21,12 +21,12 @@ public interface ORM<T extends DomainObject>
     
     public default String prepareQuery(String queryField)
     {
-        return " SELECT " + projection() + " FROM " + table() + " WHERE " + queryField + " = ? ";
+        return " SELECT " + this.projection() + " FROM " + table() + " WHERE " + queryField + " = ? ";
     }
 
     default String prepareReadAll()
     {
-        return " SELECT " + projection() + " FROM " + table();
+        return " SELECT " + this.projection() + " FROM " + table();
     }
 
     default String prepareReadById()

@@ -104,7 +104,7 @@ public class DAOLanguageImplTest extends AbstractDAOTest<Language>
         
         languagesInDB = ((DAOLanguageImpl) languageDAO).read();
         
-        assertTrue(languagesInDB.size() == rawTestLanguages.size());
+        assertEquals(languagesInDB.size(), rawTestLanguages.size());
         
         for(Language l : languagesInDB)
         {

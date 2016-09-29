@@ -17,7 +17,7 @@ public interface ORMBenchmark extends ORM<Benchmark>
 
     default String table()
     {
-        return " benchmarks ";
+        return "benchmarks";
     }
 
     default Benchmark map(ResultSet results) throws SQLException
@@ -39,6 +39,16 @@ public interface ORMBenchmark extends ORM<Benchmark>
     default String prepareReadByBenchmark()
     {
         return prepareQuery("name");
+    }
+
+    default String prepareReadByLanguage()
+    {
+        return prepareQuery("language");
+    }
+
+    default String prepareReadByFrontEndServer()
+    {
+        return prepareQuery("front_end_server");
     }
 
 }

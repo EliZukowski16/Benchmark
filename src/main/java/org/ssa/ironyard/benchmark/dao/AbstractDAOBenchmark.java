@@ -12,8 +12,11 @@ import javax.sql.DataSource;
 
 import org.ssa.ironyard.benchmark.dao.orm.ORM;
 import org.ssa.ironyard.benchmark.dao.orm.ORMBenchmark;
+import org.ssa.ironyard.benchmark.dao.orm.ORMBenchmarkEagerImpl;
 import org.ssa.ironyard.benchmark.model.Benchmark;
 import org.ssa.ironyard.benchmark.model.Benchmark.Threads;
+import org.ssa.ironyard.benchmark.model.FrontEndServer;
+import org.ssa.ironyard.benchmark.model.Language;
 
 public abstract class AbstractDAOBenchmark extends AbstractDAO<Benchmark> implements DAOBenchmark
 {
@@ -83,10 +86,11 @@ public abstract class AbstractDAOBenchmark extends AbstractDAO<Benchmark> implem
         {
             connection = datasource.getConnection();
             readStmt = connection.prepareStatement(this.orm.prepareReadAll(), Statement.RETURN_GENERATED_KEYS);
+            
             results = readStmt.executeQuery();
             while (results.next())
             {
-                Benchmark returnBenchmark = this.orm.map(results);
+                Benchmark returnBenchmark = ((ORMBenchmarkEagerImpl) this.orm).mapBenchmark(results);
 
                 benchmarks.add(returnBenchmark);
             }
@@ -103,6 +107,41 @@ public abstract class AbstractDAOBenchmark extends AbstractDAO<Benchmark> implem
         }
 
         return null;
+    }
+    
+    @Override
+    public Benchmark read(int id)
+    {
+        Connection connection = null;
+        PreparedStatement readStmt = null;
+        ResultSet results = null;
+
+        try
+        {
+            connection = datasource.getConnection();
+            readStmt = connection.prepareStatement(((ORMBenchmark) this.orm).prepareReadById());
+            readStmt.setInt(1, id);
+            results = readStmt.executeQuery();
+            if (results.next())
+            {
+                Benchmark returnBenchmark = ((ORMBenchmarkEagerImpl) this.orm).mapBenchmark(results);
+
+                return returnBenchmark;
+            }
+
+            
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            cleanup(results, readStmt, connection);
+        }
+
+        return null;
+        
     }
 
     @Override
@@ -122,7 +161,79 @@ public abstract class AbstractDAOBenchmark extends AbstractDAO<Benchmark> implem
             results = readStmt.executeQuery();
             while (results.next())
             {
-                Benchmark returnBenchmark = this.orm.map(results);
+                Benchmark returnBenchmark = ((ORMBenchmarkEagerImpl) this.orm).mapBenchmark(results);
+
+                benchmarks.add(returnBenchmark);
+            }
+
+            return benchmarks;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            cleanup(results, readStmt, connection);
+        }
+
+        return null;
+    }
+    
+    @Override
+    public List<Benchmark> readByLanguage(Language domain)
+    {
+        List<Benchmark> benchmarks = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement readStmt = null;
+        ResultSet results = null;
+
+        try
+        {
+            connection = datasource.getConnection();
+            readStmt = connection.prepareStatement(((ORMBenchmark) this.orm).prepareReadByLanguage());
+            readStmt.setInt(1, domain.getId());
+            results = readStmt.executeQuery();
+            while (results.next())
+            {
+                Benchmark returnBenchmark = ((ORMBenchmarkEagerImpl) this.orm).mapBenchmark(results);
+
+                benchmarks.add(returnBenchmark);
+            }
+
+            return benchmarks;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            cleanup(results, readStmt, connection);
+        }
+
+        return null;
+    }
+    
+    @Override
+    public List<Benchmark> readByFrontEndServer(FrontEndServer domain)
+    {
+        List<Benchmark> benchmarks = new ArrayList<>();
+
+        Connection connection = null;
+        PreparedStatement readStmt = null;
+        ResultSet results = null;
+
+        try
+        {
+            connection = datasource.getConnection();
+            readStmt = connection.prepareStatement(((ORMBenchmark) this.orm).prepareReadByFrontEndServer());
+            readStmt.setInt(1, domain.getId());
+            results = readStmt.executeQuery();
+            while (results.next())
+            {
+                Benchmark returnBenchmark = ((ORMBenchmarkEagerImpl) this.orm).mapBenchmark(results);
 
                 benchmarks.add(returnBenchmark);
             }
