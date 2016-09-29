@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
 import org.ssa.ironyard.benchmark.model.Benchmark;
 import org.ssa.ironyard.benchmark.model.Benchmark.Threads;
 import org.ssa.ironyard.benchmark.model.FrontEndServer;
@@ -15,6 +16,7 @@ import org.ssa.ironyard.benchmark.model.FrontEndServer.FrontEndServerName;
 import org.ssa.ironyard.benchmark.model.Language;
 import org.ssa.ironyard.benchmark.model.Language.LanguageName;
 
+@Component
 public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORMBenchmark
 {
     private final ORM<FrontEndServer> frontEndServerORM;
@@ -154,6 +156,7 @@ public class ORMBenchmarkEagerImpl extends AbstractORM<Benchmark> implements ORM
     @Override
     public String prepareReadByLanguage()
     {
+        
         return " SELECT " + this.projection() + " FROM " + this.table() + this.prepareJoin() + " WHERE " + this.table()
                 + ".language = ? ";
     }

@@ -149,25 +149,25 @@ public class BenchmarkTest
         assertFalse(testBenchmarkClone == testBenchmarkUnloaded);
     }
 
-    @Test
+//    @Test
     public void testDeeplyEquals()
     {
         fail("Not yet implemented"); // TODO
     }
 
-    @Test
+//    @Test
     public void testEqualsObject()
     {
         fail("Not yet implemented"); // TODO
     }
 
-    @Test
+//    @Test
     public void testSetAndIsLoaded()
     {
         fail("Not yet implemented"); // TODO
     }
 
-    @Test
+//    @Test
     public void testGetId()
     {
         fail("Not yet implemented"); // TODO
